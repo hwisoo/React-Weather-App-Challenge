@@ -12,7 +12,6 @@ class App extends Component {
     super(props)
     this.state = {
       zip:'98327',
-      //weather
       weather: {},
       weatherForecast: {},
     };
@@ -103,7 +102,7 @@ class App extends Component {
       </header>
       <Form></Form>
       <div className="container weather-container">
-        <Detail weather={this.state.weather}></Detail>
+        <Detail zip={this.state.zip} weather={this.state.weather}></Detail>
         <Forecast forecast={this.state.weatherForecast}></Forecast>
       </div>
       

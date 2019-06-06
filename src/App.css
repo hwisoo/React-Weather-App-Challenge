@@ -31,6 +31,16 @@
 .weather-container {
   display: grid;
   grid-template-columns: auto auto;
+  grid-gap: 5vw;
+}
+
+.weather-container .card {
+  text-align: left;
+  margin-bottom: 15px;
+}
+.weather-container .card p{
+  margin-left: 15px;
+  margin-bottom: 10px;
 }
 
 @keyframes App-logo-spin {
