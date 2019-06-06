@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Form() {
+export default function Forecast() {
   return (
     <div>
-      Form
+      Forecast
     </div>
   )
 }

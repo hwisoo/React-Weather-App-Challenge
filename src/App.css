@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1b3767;
   min-height: 30vh;
   display: flex;
   flex-direction: column;
@@ -21,6 +21,16 @@
 
 .App-link {
   color: #61dafb;
+  border-bottom: 2px solid #4e9c89;
+}
+
+.App-link:hover {
+  cursor: pointer;
+}
+
+.weather-container {
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
 @keyframes App-logo-spin {
