@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Form from './components/Form'
 import Detail from './components/Detail';
 import Forecast from './components/Forecast';
+
 
 const API_KEY = 'f68015cb4910abf208ca4d742ad9298f'
 
@@ -11,12 +11,34 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      zip:'98327',
+      zip: '78701',
       weather: {},
       weatherForecast: {},
     };
+    this.zipInput = React.createRef();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({ zip: this.zipInput.current.value})
+  
+    setTimeout(() => {
+      this.handleWeatherData();
+      this.handleForecastData();
+    }, 400);
+  }
+
+  handleChange(event) {
+    this.setState({ zip: event.target.value });
+  }
+
+  changeAndValidate = async (e) => {
+    await this.handleSubmit(e)
+    this.handleWeatherData();
+    this.handleForecastData();
+  }
   
 
   fetchWeather() {
@@ -36,6 +58,18 @@ class App extends Component {
       request.send();
     });
   }
+
+  handleForecastData() {
+    let promise = this.fetchForecast();
+    promise.then(response => {
+        let data = JSON.parse(response);
+        this.setState({
+          weatherForecast: data
+        });
+        console.log(this.state.weatherForecast)
+    });
+  }
+  
 
   handleWeatherData() {
     let promise = this.fetchWeather();
@@ -66,21 +100,11 @@ class App extends Component {
     });
   }
 
-  handleForecastData() {
-    let promise = this.fetchForecast();
-    promise.then(response => {
-        let data = JSON.parse(response);
-        this.setState({
-          weatherForecast: data
-        });
-        console.log(this.state.weatherForecast)
-    });
-  }
-  
-  componentDidMount(){
+  componentDidMount(){ 
     this.handleWeatherData();
     this.handleForecastData();
   }
+
 
   render(){
 
@@ -100,7 +124,14 @@ class App extends Component {
           Source Code on Github
         </a>
       </header>
-      <Form></Form>
+      <div className="container">
+        <form className="form" onSubmit={this.handleSubmit}>
+        <label>Enter ZIP code: </label>
+          <input ref={this.zipInput} type="text" defaultValue={this.state.zip}></input>
+          <button type="submit" className="btn btn-dark">Submit</button>
+        </form>
+      </div>
+      
       <div className="container weather-container">
         <Detail zip={this.state.zip} weather={this.state.weather}></Detail>
         <Forecast forecast={this.state.weatherForecast}></Forecast>

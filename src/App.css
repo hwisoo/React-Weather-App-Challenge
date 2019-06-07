@@ -11,6 +11,7 @@
 .App-header {
   background-color: #1b3767;
   min-height: 30vh;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,6 +42,22 @@
 .weather-container .card p{
   margin-left: 15px;
   margin-bottom: 10px;
+}
+
+span.zip {
+  margin-left: 40px;
+}
+
+.form {
+  margin:20px;
+}
+.form input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button.btn-dark {
+  background-color: #1b3767
 }
 
 @keyframes App-logo-spin {
