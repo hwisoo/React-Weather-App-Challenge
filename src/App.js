@@ -3,9 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 import Detail from './components/Detail';
 import Forecast from './components/Forecast';
-
+import styled from "@emotion/styled";
+import { useTheme } from "./ThemeContext";
 
 const API_KEY = 'f68015cb4910abf208ca4d742ad9298f'
+
+const Wrapper = styled("div")`
+  background: ${props => props.theme.background};
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen";
+  h2, h5, p, .card, .btn {
+    background: ${props => props.theme.background};
+    color: ${props => props.theme.color};
+  }
+
+  
+`;
+
+
 
 class App extends Component {
   constructor(props){
@@ -15,6 +29,7 @@ class App extends Component {
       weather: {},
       weatherForecast: {},
     };
+    
     this.zipInput = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -106,9 +121,25 @@ class App extends Component {
   }
 
 
-  render(){
 
+
+  render(){
+    const Theme = () => {
+      const themeState = useTheme();
+      return (
+        <Wrapper>
+          <button className="btn btn-dark" onClick={() => themeState.toggle()}>
+                {themeState.dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              </button>
+          <div className="container weather-container">
+          <Detail zip={this.state.zip} weather={this.state.weather}></Detail>
+          <Forecast forecast={this.state.weatherForecast}></Forecast>
+          </div>
+        </Wrapper>
+      );
+    };
     return (
+
       <div className="App">
       <header className="App-header">
         <div>
@@ -130,12 +161,10 @@ class App extends Component {
           <input ref={this.zipInput} type="text" defaultValue={this.state.zip}></input>
           <button type="submit" className="btn btn-dark">Submit</button>
         </form>
+        
       </div>
       
-      <div className="container weather-container">
-        <Detail zip={this.state.zip} weather={this.state.weather}></Detail>
-        <Forecast forecast={this.state.weatherForecast}></Forecast>
-      </div>
+      <Theme></Theme>
       
     </div>
   );
