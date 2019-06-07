@@ -10,7 +10,7 @@ export default function Detail(props) {
       <h2>Details</h2>
       {main&&weather ? (
         <div className="card">
-        <h5 className="card-header">City: {name}, <span className='zip'>ZIP: {props.zip}</span></h5>
+        <h5 className="card-header">City: {name} <span className='zip'>ZIP: {props.zip}</span></h5>
         <p>Current Temperature: {main.temp} &#176;F</p>
         <p>High: {main.temp_max} &#176;F</p> 
         <p>Low: {main.temp_min} &#176;F</p>

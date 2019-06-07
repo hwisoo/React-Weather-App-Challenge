@@ -11,9 +11,12 @@ const API_KEY = 'f68015cb4910abf208ca4d742ad9298f'
 const Wrapper = styled("div")`
   background: ${props => props.theme.background};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen";
-  h2, h5, p, .card, .btn {
+  h2, h5, p, label, .card, .btn {
     background: ${props => props.theme.background};
     color: ${props => props.theme.color};
+  }
+  .btn {
+    margin-top: 20px;
   }
 
   
@@ -130,7 +133,14 @@ class App extends Component {
         <Wrapper>
           <button className="btn btn-dark" onClick={() => themeState.toggle()}>
                 {themeState.dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              </button>
+          </button>
+          <div className="container">
+          <form className="form" onSubmit={this.handleSubmit}>
+          <label>Enter ZIP code: </label>
+            <input ref={this.zipInput} type="text" defaultValue={this.state.zip}></input>
+            <button type="submit" className="btn btn-dark">Submit</button>
+          </form>
+          </div>
           <div className="container weather-container">
           <Detail zip={this.state.zip} weather={this.state.weather}></Detail>
           <Forecast forecast={this.state.weatherForecast}></Forecast>
@@ -155,16 +165,8 @@ class App extends Component {
           Source Code on Github
         </a>
       </header>
-      <div className="container">
-        <form className="form" onSubmit={this.handleSubmit}>
-        <label>Enter ZIP code: </label>
-          <input ref={this.zipInput} type="text" defaultValue={this.state.zip}></input>
-          <button type="submit" className="btn btn-dark">Submit</button>
-        </form>
-        
-      </div>
       
-      <Theme></Theme>
+      <Theme className="weather-container"></Theme>
       
     </div>
   );
