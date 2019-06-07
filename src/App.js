@@ -15,14 +15,10 @@ const Wrapper = styled("div")`
     background: ${props => props.theme.background};
     color: ${props => props.theme.color};
   }
-  .btn {
+  .btn.theme {
     margin-top: 20px;
   }
-
-  
 `;
-
-
 
 class App extends Component {
   constructor(props){
@@ -35,7 +31,6 @@ class App extends Component {
     
     this.zipInput = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit(event) {
@@ -46,16 +41,6 @@ class App extends Component {
       this.handleWeatherData();
       this.handleForecastData();
     }, 400);
-  }
-
-  handleChange(event) {
-    this.setState({ zip: event.target.value });
-  }
-
-  changeAndValidate = async (e) => {
-    await this.handleSubmit(e)
-    this.handleWeatherData();
-    this.handleForecastData();
   }
   
 
@@ -124,14 +109,12 @@ class App extends Component {
   }
 
 
-
-
   render(){
     const Theme = () => {
       const themeState = useTheme();
       return (
         <Wrapper>
-          <button className="btn btn-dark" onClick={() => themeState.toggle()}>
+          <button className="btn btn-dark theme" onClick={() => themeState.toggle()}>
                 {themeState.dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
           </button>
           <div className="container">

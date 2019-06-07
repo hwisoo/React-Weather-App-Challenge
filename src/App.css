@@ -14,6 +14,7 @@ body {
   background-color: #1b3767;
   min-height: 20vh;
   display: flex;
+  padding-bottom: 15px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -62,8 +63,6 @@ span.zip {
 button.btn-dark {
   background-color: #1b3767
 }
-
-
 
 @keyframes App-logo-spin {
   from {
